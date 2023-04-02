@@ -1,23 +1,41 @@
-package hw1;
-import java.util.Scanner;
-
 public class task2 {
-    private static Scanner scan = new Scanner(System.in);
-
     public static void main(String[] args) {
-        System.out.println("enter numbers count:");
-        int n = scan.nextInt();
-        int[] arr = new int[n];
-        for (int i = 0; i < n; i++) {
-            System.out.printf("enter number #%d:", i+1);
-            System.out.println();
-            arr[i] = scan.nextInt();
+        int n = 2;
+        int m = 3;
+
+        String[] receipts   = new String[n];
+        String[] components = new String[m];
+
+        receipts[0] = "Рецепт 1. Арахис 100гр, мороженое 200гр. Возьмите арахис и измелчите его. Посыпьте измельчённый арахис на мороженое.";
+        receipts[1] = "Рецепт 2. Клубника 100гр, сгущенка 3кг. Смешать, есть) Радоваться жизни.";
+
+        components[0] = "арахис - колбаса";
+        components[1] = "клубника - вишня";
+        components[2] = "сгущенка - молоко";
+
+        String target = "";
+        String replmt = "";
+
+        for (String component : components) {
+            target = component.substring(0, component.indexOf(" -"));
+            replmt = component.substring(component.indexOf("- ")+2);
+
+            for (String receipt : receipts) {
+                String newReceipt = receipt;
+                String[] words = receipt.split("\\s");
+                for (String word : words) {
+                    StringBuilder replmnt2 = new StringBuilder(replmt);
+                    if (word.compareToIgnoreCase(target) == 0) {
+                        if (Character.isUpperCase(word.charAt(0))) replmnt2.setCharAt(0, Character.toUpperCase(replmnt2.charAt(0)));
+                        newReceipt = newReceipt.replace(word, replmnt2);
+                    }
+                }
+                receipts[java.util.Arrays.asList(receipts).indexOf(receipt)] = newReceipt;
+            }
         }
-        System.out.println("enter multiplier:");
-        int mult = scan.nextInt();
-        for (int i = 0; i < arr.length; i++) {
-            System.out.printf("%d * %d = %d", arr[i], mult, arr[i] * mult);
-            System.out.println();
+
+        for (String receipt : receipts) {
+            System.out.println(receipt);
         }
     }
 }

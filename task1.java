@@ -1,40 +1,67 @@
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
 
 public class task1 {
+  public static class Laptop {
+    private String brand;
+    private String model;
+    private int ram;
+    private int storage;
+    private String os;
+    private String color;
+    private double price;
 
-  static void add(HashMap<String, ArrayList<String>> book, String name, String phone) {
-    if (book.containsKey(name)) {
-      ArrayList<String> phones = get(book, name);
-      phones.add(phone);
-      book.put(name, phones);
-    } else {
-      ArrayList<String> phones = new ArrayList<>();
-      phones.add(phone);
-      book.put(name, phones);
+    public Laptop(String brand, String model, int ram, int storage, String os,
+        String color, double price) {
+      this.brand = brand;
+      this.model = model;
+      this.ram = ram;
+      this.storage = storage;
+      this.os = os;
+      this.color = color;
+      this.price = price;
     }
-  }
 
-  static ArrayList<String> get(HashMap<String, ArrayList<String>> book, String name) {
-    return book.get(name);
-  }
+    public String getBrand() {
+      return brand;
+    }
 
-  static void remove(HashMap<String, ArrayList<String>> book, String name) {
-    book.remove(name);
-  }
+    public String getModel() {
+      return model;
+    }
 
-  static void printAll(HashMap<String, ArrayList<String>> book) {
-    for (String name : book.keySet()) {
-      System.out.println(name + ": " + book.get(name));
+    public int getRam() {
+      return ram;
+    }
+
+    public int getStorage() {
+      return storage;
+    }
+
+    public String getOs() {
+      return os;
+    }
+
+    public String getColor() {
+      return color;
+    }
+
+    public double getPrice() {
+      return price;
     }
   }
 
   public static void main(String[] args) {
-    HashMap<String, ArrayList<String>> book = new HashMap<>();
-    // PhoneBook phoneBook = new PhoneBook();
-    add(book, "John Wick",    "123456789");
-    add(book, "James Bond",   "007007007");
-    add(book, "Jack Daniels", "404040404");
-    printAll(book);
+    Set<Laptop> laptops = new HashSet<>();
+    laptops.add(new Laptop("Apple", "MacBook Pro", 16, 512, "macOS", "Silver",
+        1999.99));
+    laptops.add(new Laptop("Dell", "XPS 13", 8, 256, "Windows 10", "Rose Gold",
+        1199.99));
+    laptops.add(new Laptop("Lenovo", "ThinkPad X1 Carbon", 16, 1_000, "Windows 10 Pro", "Black", 1899.99));
+    laptops.add(new Laptop("Asus", "ZenBook UX425", 16, 512, "Windows 10 Home",
+        "Pine Grey", 1399.99));
+    for (var laptop : laptops) {
+      System.out.println(laptop.getBrand());
+    }
   }
 }
